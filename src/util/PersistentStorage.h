@@ -92,6 +92,9 @@ class PersistentStorage
     /** Returns a reference to the setting struct */
     SettingStruct &GetSettings() { return settings_; }
 
+    /** Returns a reference to the setting struct */
+    const SettingStruct &GetSettings() const { return settings_; }
+
     /** Performs the save operation, storing the storage */
     void Save()
     {
