@@ -44,6 +44,18 @@ class PersistentStorage
     /** Constructor for storage class 
      *  \param qspi reference to the hardware qspi peripheral.
      */
+    PersistentStorage()
+    : qspi_(*(daisy::QSPIHandle *)nullptr),
+      address_offset_(0),
+      default_settings_(),
+      settings_(),
+      state_(State::UNKNOWN)
+    {
+    }
+
+    /** Constructor for storage class 
+     *  \param qspi reference to the hardware qspi peripheral.
+     */
     PersistentStorage(QSPIHandle &qspi)
     : qspi_(qspi),
       address_offset_(0),
@@ -51,6 +63,26 @@ class PersistentStorage
       settings_(),
       state_(State::UNKNOWN)
     {
+    }
+
+    /** Initialize Storage class
+     *
+     *  The values in this class will be stored as the default
+     *  for restoration to 'factory' settings.
+     *
+     *  \param qspi reference to the qspi interface
+     *  \param defaults should be a setting structure containing the default values.
+     *      this will be updated to contain the stored data.
+     *  \param address_offset offset for location on the QSPI chip (offset to base address of device).
+     *      This defaults to the first address on the chip, and will be masked to the nearest multiple of 256
+     **/
+    void Init(QSPIHandle          &qspi,
+              const SettingStruct &defaults,
+              uint32_t             address_offset = 0)
+    {
+        qspi_ = qspi;
+
+        Init(defaults, address_offset);
     }
 
     /** Initialize Storage class
@@ -103,11 +135,13 @@ class PersistentStorage
     }
 
     /** Restores the settings stored in the QSPI */
-    void RestoreDefaults()
+    void RestoreDefaults(bool store = true)
     {
         settings_ = default_settings_;
         state_    = State::FACTORY;
-        StoreSettingsIfChanged();
+
+        if(store)
+            StoreSettingsIfChanged();
     }
 
   private:
@@ -147,7 +181,7 @@ class PersistentStorage
         }
     }
 
-    QSPIHandle &  qspi_;
+    QSPIHandle   &qspi_;
     uint32_t      address_offset_;
     SettingStruct default_settings_;
     SettingStruct settings_;
