@@ -63,18 +63,31 @@
   * @{
   */
 
+#ifndef USB_VID
+#define USB_VID 1155
+#endif
+#ifndef USB_PID
+#define USB_PID 22336
+#endif
+#ifndef USB_MANUFACTURER_STRING
+#define USB_MANUFACTURER_STRING "Electrosmith"
+#endif
+#ifndef USB_PRODUCT_STRING
+#define USB_PRODUCT_STRING "Daisy Seed"
+#endif
+
 // BOTH
-#define USBD_VID 1155
+#define USBD_VID USB_VID //1155
 #define USBD_LANGID_STRING 1033
-#define USBD_MANUFACTURER_STRING "Line 1"
+#define USBD_MANUFACTURER_STRING USB_MANUFACTURER_STRING //"Electrosmith"
 // HS
-#define USBD_PID_HS 22336 // replace with our PID when we have one.
-#define USBD_PRODUCT_STRING_HS "Line 1 External"
+#define USBD_PID_HS USB_PID //22336 // replace with our PID when we have one.
+#define USBD_PRODUCT_STRING_HS USB_PRODUCT_STRING //"Daisy Seed External"
 #define USBD_CONFIGURATION_STRING_HS "CDC Config"
 #define USBD_INTERFACE_STRING_HS "CDC Interface"
 // FS
-#define USBD_PID_FS 22336 // replace with our PID when we have one.
-#define USBD_PRODUCT_STRING_FS "Line 1 Built In"
+#define USBD_PID_FS USB_PID// 22336 // replace with our PID when we have one.
+#define USBD_PRODUCT_STRING_FS USB_PRODUCT_STRING //"Daisy Seed Built In"
 #define USBD_CONFIGURATION_STRING_FS "CDC Config"
 #define USBD_INTERFACE_STRING_FS "CDC Interface"
 
