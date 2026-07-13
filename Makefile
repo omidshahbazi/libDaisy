@@ -227,8 +227,14 @@ Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ctlreq.c \
 Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_ioreq.c \
 Middlewares/ST/STM32_USB_Host_Library/Core/Src/usbh_pipes.c
 
+C_SOURCE_FILES ?= 
+C_SOURCES += $(C_SOURCE_FILES)
+
 # C++ Source
 CPP_SOURCES += $(addsuffix .cpp, $(addprefix $(MODULE_DIR)/, $(CPP_MODULES)))
+
+CPP_SOURCE_FILES ?= 
+CPP_SOURCES += $(CPP_SOURCE_FILES)
 
 # C sources
 C_SOURCES += $(addsuffix .c, $(addprefix $(MODULE_DIR)/, $(C_MODULES)))
@@ -318,6 +324,9 @@ C_INCLUDES = \
 -I$(MODULE_DIR) \
 -I.
 
+INCLUDE_FILES ?= 
+C_INCLUDES += $(INCLUDE_FILES)
+
 # suppressions for warnings introduced by HAL/FatFS
 WARNINGS += -Wall -Wno-attributes -Wno-strict-aliasing -Wno-maybe-uninitialized -Wno-missing-attributes -Wno-stringop-overflow #-Werror
 CPP_WARNINGS += -Wno-register
@@ -334,6 +343,9 @@ C_DEFS += -DDEBUG=1
 else
 C_DEFS += -DNDEBUG=1 -DRELEASE=1
 endif
+
+DEFINES ?=
+C_DEFS += $(DEFINES)
 
 CFLAGS += \
 -finline-functions

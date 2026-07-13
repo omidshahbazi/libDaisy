@@ -64,16 +64,16 @@
   */
 
 #ifndef USB_VID
-#define USB_VID 1155
+#error "USB_VID is not defined in Makefile"
 #endif
 #ifndef USB_PID
-#define USB_PID 22336
+#error "USB_ADUIO_PID is not defined in Makefile"
 #endif
 #ifndef USB_MANUFACTURER_STRING
-#define USB_MANUFACTURER_STRING "Electrosmith"
+#error "USB_MANUFACTURER_STRING is not defined in Makefile"
 #endif
 #ifndef USB_PRODUCT_STRING
-#define USB_PRODUCT_STRING "Daisy Seed"
+#error "USB_PRODUCT_STRING is not defined in Makefile"
 #endif
 
 // BOTH

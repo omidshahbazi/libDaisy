@@ -34,8 +34,10 @@ OPT ?= -O2
 # paths
 ######################################
 
+BUILD_DIRECTORY ?= build
+
 # Build path
-BUILD_DIR = build
+BUILD_DIR = $(BUILD_DIRECTORY)
 
 LIBDAISY_DIR ?= \
 ./libdaisy
@@ -49,8 +51,17 @@ SYSTEM_FILES_DIR ?= \
 
 CPP_SOURCES ?=
 
+CPP_SOURCE_FILES ?= 
+CPP_SOURCES += $(CPP_SOURCE_FILES)
+
+INCLUDE_FILES ?= 
+C_INCLUDES += $(INCLUDE_FILES)
+
 C_SOURCES += \
 $(SYSTEM_FILES_DIR)/startup_stm32h750xx.c
+
+C_SOURCE_FILES ?= 
+C_SOURCES += $(C_SOURCE_FILES)
 
 # Expose platform configuration to all compilation units (CMSIS DSP components)
 C_INCLUDES += -include stm32h7xx.h
@@ -121,6 +132,9 @@ C_DEFS +=  \
 ifdef DEBUG
 C_DEFS += -DDEBUG
 endif
+
+DEFINES ?= 
+C_DEFS += $(DEFINES)
 
 # AS includes
 AS_INCLUDES =
